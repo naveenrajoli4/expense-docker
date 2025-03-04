@@ -1,0 +1,33 @@
+networks:
+  rnk_nw: {} # Custom network name
+
+volumes:
+  mysql_vol: # Custom volume for MySQL data
+
+services:
+  mysql:
+    image: mysql:1.1  # MySQL image 
+    command: sh -c "sleep 10 && node /opt/backend/index.js"
+    networks:
+    - rnk_nw # Attach to custom network
+    container_name: mysql # Custom container name
+    volumes:
+    - mysql_vol:/var/lib/mysql # Store data in volume
+
+  backend:
+    image: backend:1.2
+    networks:
+    - rnk_nw  
+    container_name: backend
+    depends_on:
+    - mysql
+
+  frontend:
+    image: frontend:1.3
+    networks:
+    - rnk_nw
+    container_name: frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - backend
