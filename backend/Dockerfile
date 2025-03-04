@@ -3,6 +3,6 @@ WORKDIR /opt/backend
 COPY scripts/* .
 RUN npm install
 ENV DB_HOST="mysql"
-# ENV DB_HOST="localhost" ---> this form host network
+# The below command is used for host network
 # ENV DB_HOST="localhost" 
 CMD ["node", "index.js"]
