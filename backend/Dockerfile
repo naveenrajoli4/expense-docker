@@ -5,7 +5,7 @@ RUN addgroup -S naveen && adduser -S naveen -G naveen
 RUN mkdir /opt/backend
 RUN chown -R naveen:naveen /opt/backend
 WORKDIR /opt/backend
-COPY scripts/* .
+COPY scripts/* ./
 RUN npm install
 ENV DB_HOST="mysql"
 # The below command is used for host network
