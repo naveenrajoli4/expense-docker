@@ -12,3 +12,7 @@ ENV DB_HOST="mysql"
 # ENV DB_HOST="localhost" 
 USER naveen
 CMD ["node", "index.js"]
+EXPOSE 3000
+LABEL project="naveen" \
+      environment="prod" \
+      owner="rnk"
