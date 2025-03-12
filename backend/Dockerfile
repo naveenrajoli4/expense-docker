@@ -9,7 +9,7 @@ FROM node:20.18.3-alpine3.21
 RUN addgroup -S naveen && adduser -S naveen -G naveen && \
     mkdir /opt/backend && \
     chown -R naveen:naveen /opt/backend
-ENV DB_HOST="mysql"
+ENV DB_HOST="mysql-svc"
 WORKDIR /opt/backend
 USER naveen
 COPY --from=builder /opt/backend /opt/backend
