@@ -1,14 +1,16 @@
-# FROM node:20
-FROM node:20.18-alpine3.21
-# addgroup -S appgroup && adduser -S appuser -G appgroup for alpine OS
-RUN addgroup -S naveen && adduser -S naveen -G naveen
-RUN mkdir /opt/backend
-RUN chown -R naveen:naveen /opt/backend
+#FROM node:20
+FROM node:20.18.3-alpine3.21 AS builder
 WORKDIR /opt/backend
 COPY scripts/* .
 RUN npm install
+
+
+FROM node:20.18.3-alpine3.21
+RUN addgroup -S naveen && adduser -S naveen -G naveen && \
+    mkdir /opt/backend && \
+    chown -R naveen:naveen /opt/backend
 ENV DB_HOST="mysql"
-# The below command is used for host network
-# ENV DB_HOST="localhost" 
+WORKDIR /opt/backend
 USER naveen
+COPY --from=builder /opt/backend /opt/backend
 CMD ["node", "index.js"]
