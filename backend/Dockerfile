@@ -12,5 +12,6 @@ RUN addgroup -S naveen && adduser -S naveen -G naveen && \
 #### ACTUALLY IT SHOULD BE ONLY MYSQL BUT I CHANGED TO MYSQL-SVC TO WORK K8 DEPLOYMENT. ITS A SERVICE TO SERVICE COMMUNICATION.
 ENV DB_HOST="mysql-svc" 
 WORKDIR /opt/backend
+USER naveen
 COPY --from=builder /opt/backend /opt/backend
 CMD ["node", "index.js"]
